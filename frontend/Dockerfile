@@ -1,4 +1,4 @@
-FROM golang:1.21.3-alpin as builder
+FROM golang:1.21.3-alpine as builder
 WORKDIR /src
 COPY . .
 RUN go build -o myfrontend
