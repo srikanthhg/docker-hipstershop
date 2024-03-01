@@ -7,4 +7,4 @@ FROM alpine:3.18.4
 WORKDIR /src
 COPY --from=builder /src/myfrontend /src/myfrontend
 EXPOSE 8080
-ENTRYPOINT ["/src/server"]
+ENTRYPOINT ["/src/myfrontend"]
