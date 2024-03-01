@@ -9,5 +9,5 @@ COPY --from=builder /src/myfrontend /src/frontend
 COPY ./templates ./templates
 COPY ./static ./static
 EXPOSE 8080
-Environment=PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
+ENV PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
 ENTRYPOINT ["/src/frontend"]
