@@ -8,4 +8,5 @@ WORKDIR /src
 COPY --from=builder /src/productcatalogservice /src/productcatalogservice
 COPY products.json .
 EXPOSE 3550
+
 ENTRYPOINT ["/src/productcatalogservice"]
