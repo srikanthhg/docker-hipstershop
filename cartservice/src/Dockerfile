@@ -29,6 +29,8 @@ COPY --from=builder /cartservice .
 
 ENV REDIS_ADDR=redis:6379
 
+ENV PORT=7070
+
 EXPOSE 7070
 
 ENTRYPOINT ["/app/cartservice"]
