@@ -5,7 +5,7 @@ volumes:
 
 networks:
   default:
-  external:
+  external: true
   name: hipstershop
 
 services:
