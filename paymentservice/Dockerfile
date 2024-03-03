@@ -19,6 +19,7 @@ COPY --from=builder /app/node_modules /app/node_modules
 COPY . .
 
 #ENV SHIPPING_SERVICE_ADDR=shippingservice:50051
+ENV PORT=50051
 
 EXPOSE 50051
 
