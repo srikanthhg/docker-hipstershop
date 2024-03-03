@@ -15,4 +15,4 @@ COPY --from=builder /app/shippingservice /app/shippingservice
 
 EXPOSE 50051
 
-ENTRYPOINT ["/app/frontend"]
+ENTRYPOINT ["/app/shippingservice"]

@@ -4,9 +4,7 @@ volumes:
   redis: #docker volume create redis
 
 networks:
-  default:
-  external: true
-  name: hipstershop
+  hipstershop:
 
 services:
   frontend:
