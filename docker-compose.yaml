@@ -10,6 +10,8 @@ services:
   frontend:
     image: srikanthhg/frontend:v1
     container_name: frontend
+    ports:
+    - "80:8080"
     depends_on:
     - productcatalogservice
     - currencyservice
@@ -44,10 +46,19 @@ services:
   checkoutservice:
     image: srikanthhg/checkoutservice:v1
     container_name: checkoutservice
+    depends_on:
+    - productcatalogservice
+    - shippingservice
+    - paymentservice
+    - emailservice
+    - currencyservice
+    - cartservice
 
   recommendationservice:
     image: srikanthhg/recommendationservice:v1
     container_name: recommendationservice
+    depends_on:
+    - productcatalogservice
 
   adservice:
     image: srikanthhg/adservice:v1
