@@ -4,14 +4,14 @@ WORKDIR /app
 
 COPY . .
 
-RUN go build -o myfrontend
+RUN go build -o frontend
 
 ########################
 FROM alpine:3.18.4
 
 WORKDIR /app
 
-COPY --from=builder /app/myfrontend /app/frontend
+COPY --from=builder /app/frontend /app/frontend
 
 COPY ./templates ./templates
 

@@ -20,6 +20,7 @@ RUN mkdir -p /opt/cprof && \
     rm -rf profiler_java_agent.tar.gz
 
 WORKDIR /app
+
 COPY --from=builder /app .
 
 EXPOSE 9555
