@@ -11,7 +11,7 @@ COPY . .
 RUN chmod +x gradlew
 RUN ./gradlew installDist
 
-FROM openjdk:21-jre-alpine3.9
+FROM eclipse-temurin:21-jre-alpine
 
 # Download Stackdriver Profiler Java agent
 RUN mkdir -p /opt/cprof && \
