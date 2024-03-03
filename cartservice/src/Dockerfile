@@ -1,9 +1,44 @@
+# # https://mcr.microsoft.com/product/dotnet/sdk
+# FROM mcr.microsoft.com/dotnet/sdk:8.0.100 as builder
+
+# WORKDIR /app
+
+# COPY cartservice.csproj .
+
+# RUN dotnet restore cartservice.csproj \
+#     -r linux-musl-x64
+
+# COPY . .
+
+# RUN dotnet publish cartservice.csproj \
+#     -p:PublishSingleFile=true \
+#     -r linux-musl-x64 \
+#     --self-contained true \
+#     -p:PublishTrimmed=True \
+#     -p:TrimMode=Full \
+#     -c release \
+#     -o /cartservice \
+#     --no-restore
+
+# # https://mcr.microsoft.com/product/dotnet/runtime-deps
+# FROM mcr.microsoft.com/dotnet/runtime-deps:8.0.0-alpine3.18-amd64
+
+# WORKDIR /app
+
+# COPY --from=builder /cartservice .
+
+# ENV REDIS_ADDR=redis:6379
+
+# EXPOSE 7070
+
+# ENTRYPOINT ["/app/cartservice"]
+#############################################################
 # https://mcr.microsoft.com/product/dotnet/sdk
 FROM mcr.microsoft.com/dotnet/sdk:8.0.100 as builder
 
 WORKDIR /app
 
-COPY cartservice.csproj .
+COPY . .
 
 RUN dotnet restore cartservice.csproj \
     -r linux-musl-x64
@@ -20,15 +55,16 @@ RUN dotnet publish cartservice.csproj \
     -o /cartservice \
     --no-restore
 
+RUN dotnet publish -c Release -o out
 # https://mcr.microsoft.com/product/dotnet/runtime-deps
 FROM mcr.microsoft.com/dotnet/runtime-deps:8.0.0-alpine3.18-amd64
 
 WORKDIR /app
 
-COPY --from=builder /cartservice .
+COPY --from=builder /app .
 
 ENV REDIS_ADDR=redis:6379
 
 EXPOSE 7070
 
-ENTRYPOINT ["/app/cartservice"]
+ENTRYPOINT ["dotnet" "/app/src/bin/Release/net8.0/cartservice.dll --urls http://0.0.0.0:7070"]
