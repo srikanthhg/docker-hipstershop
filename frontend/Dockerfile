@@ -1,6 +1,6 @@
 FROM golang:1.21.3-alpine as builder
 
-WORKDIR /src
+WORKDIR /app
 
 COPY . .
 
@@ -9,9 +9,9 @@ RUN go build -o myfrontend
 ########################
 FROM alpine:3.18.4
 
-WORKDIR /src
+WORKDIR /app
 
-COPY --from=builder /src/myfrontend /src/frontend
+COPY --from=builder /app/myfrontend /app/frontend
 
 COPY ./templates ./templates
 
@@ -33,4 +33,4 @@ ENV SHIPPING_SERVICE_ADDR=shippingservice:50051
 
 ENV AD_SERVICE_ADDR=adservice:9555
 
-ENTRYPOINT ["/src/frontend"]
+ENTRYPOINT ["/app/frontend"]
