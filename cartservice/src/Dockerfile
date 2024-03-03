@@ -67,4 +67,4 @@ ENV REDIS_ADDR=redis:6379
 
 EXPOSE 7070
 
-ENTRYPOINT ["dotnet" "/app/src/bin/Release/net8.0/cartservice.dll --urls http://0.0.0.0:7070"]
+ENTRYPOINT ["/app/src/bin/Release/net8.0/cartservice.dll --urls http://0.0.0.0:7070"]
