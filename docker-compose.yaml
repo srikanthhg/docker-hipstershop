@@ -1,0 +1,67 @@
+version: "3.8"
+
+volumes:
+  redis: #docker volume create redis
+
+networks:
+  default:
+  external:
+  name: hipstershop
+
+services:
+  frontend:
+    image: srikanthhg/frontend:v1
+    container_name: frontend
+    depends_on:
+    - productcatalogservice
+    - currencyservice
+    - cartservice
+    - recommendationservice
+    - checkoutservice
+    - shippingservice
+    - adservice
+
+  productcatalogservice:
+    image: srikanthhg/productcatalogservice:v1
+    container_name: productcatalogservice
+
+  currencyservice:
+    image: srikanthhg/currencyservice:v1
+    container_name: currencyservice
+
+  cartservice:
+    image: srikanthhg/cartservice:v1
+    container_name: cartservice
+    depends_on:
+    - redis
+
+  shippingservice:
+    image: srikanthhg/shippingservice:v1
+    container_name: shippingservice
+
+  emailservice:
+    image: srikanthhg/emailservice:v1
+    container_name: emailservice
+
+  checkoutservice:
+    image: srikanthhg/checkoutservice:v1
+    container_name: checkoutservice
+
+  recommendationservice:
+    image: srikanthhg/recommendationservice:v1
+    container_name: recommendationservice
+
+  adservice:
+    image: srikanthhg/adservice:v1
+    container_name: adservice
+
+  paymentservice:
+    image: srikanthhg/paymentservice:v1
+    container_name: paymentservice
+    
+  redis:
+    image: redis
+    container_name: redis
+    volumes: 
+    - redis:/data
+
