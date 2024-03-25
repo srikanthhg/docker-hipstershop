@@ -3,14 +3,14 @@ version: "3.8"
 volumes:
   redis: #docker volume create redis
 
-# networks:
-#   hipstershop:
-#     driver: bridge
-
 networks:
-  default:
-    external:
-      name: hipstershop  # docker network create hipstershop
+  hipstershop:
+    driver: bridge
+
+# networks:
+#   default:
+#     external:
+#       name: hipstershop  # docker network create hipstershop
 
 services:
   frontend:
