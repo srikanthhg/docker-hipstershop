@@ -7,10 +7,10 @@ volumes:
 #   hipstershop:
 #     driver: bridge
 
-# networks:
-#   default:
-#     external:
-#       name: hipstershop
+networks:
+  default:
+    external:
+      name: hipstershop
 
 services:
   frontend:
